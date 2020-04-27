@@ -88,8 +88,8 @@ fi
 
 vnstat -u -i $NEW_INTERFACE
 
-wget -O stats.sh https://github.com/ZLHysong/getStats/stats.sh
-wget -O getAverages.py https://github.com/ZLHysong/getStats/getAverages.py
+wget -O stats.sh https://raw.githubusercontent.com/ZLHysong/getStats/master/stats.sh
+wget -O getAverages.py https://raw.githubusercontent.com/ZLHysong/getStats/master/getAverages.py
 
 if [ -n "$(cron_exist)" ]
 then
