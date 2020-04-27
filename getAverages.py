@@ -37,7 +37,9 @@ def main():
              " (" + format(float(words[3]), '2.0f') + "M" +
              " / " + format(float(words[4]), '2.0f') + "M)" +
              " | HDD: " + format(float(words[5]) * 100, '2.0f') + "%" +
-             " | CPU: " + words[6]) # RAM
+             " | CPU: " + words[6] +
+             " | Received: " + words[7] +
+             " | Transmitted: " + words[8])
             print("") # CPU
             
             ramTotal = ramTotal + float(words[2])
