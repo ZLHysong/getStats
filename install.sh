@@ -42,7 +42,7 @@ then
     else
         echo "vnstat already installed."
     fi
-elif [ "$(linux_distro)" = 'centos' ]
+elif [ "$(linux_distro)" = '"centos"' ]
 then
 	echo "I'm CentOS"
 
