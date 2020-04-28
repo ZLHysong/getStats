@@ -101,8 +101,8 @@ then
     fi
 fi
 
-
-if [ -n $(current_interface) ]
+# if we are in the Docker CentOS droplets, it seems that the "automatic selection" is fine, so ignore this section
+if [ "$(linux_distro)" != '"centos"' ]
 then
     if [ $(current_interface) != $NEW_INTERFACE ]
     then
