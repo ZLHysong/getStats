@@ -59,6 +59,7 @@ def main():
     print("CPU Average: " + format(cpuAverage, '.2f') + "") # RAM
 
     f = open("/home/ubuntu/getStats/avglog.txt", "a")
+    f.write(words[0] + " " + words[1] + " ") # RAM
     f.write("RAM Average: " + format(ramAverage, '2.0f') + "% ") # RAM
     f.write("HDD Average: " + format(hddAverage, '2.0f') + "% ") # RAM
     f.write("CPU Average: " + format(cpuAverage, '.2f') + "\n") # RAM
