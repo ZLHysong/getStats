@@ -22,7 +22,7 @@ vnstat_owner() {
 }
 
 vnstat_status() {
-    if [ "$(linux_distro)" = 'debian' ]
+    if [ "$(linux_distro)" = 'debian' ] || [ "$(linux_distro)" = 'ubuntu' ]
     then
         sudo service vnstat status | grep failed
     elif [ "$(linux_distro)" = 'centos' ]
@@ -35,7 +35,7 @@ cron_exist() {
     crontab -l -u $USER
 }
 
-if [ "$(linux_distro)" = 'debian' ]
+if [ "$(linux_distro)" = 'debian' ] || [ "$(linux_distro)" = 'ubuntu' ]
 then
 	echo "Im Debian!"
     installed() {
@@ -126,7 +126,7 @@ else
     echo "vnstat service already running."
 fi
 
-if [ "$(linux_distro)" = 'debian' ]
+if [ "$(linux_distro)" = 'debian' ] || [ "$(linux_distro)" = 'ubuntu' ]
 then
     vnstat -u -i $NEW_INTERFACE
 elif [ "$(linux_distro)" = 'centos' ]
