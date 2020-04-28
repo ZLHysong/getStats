@@ -48,7 +48,7 @@ then
     else
         echo "vnstat already installed."
     fi
-    
+
     sudo apt install python3 -y
 
 elif [ "$(linux_distro)" = '"centos"' ]
@@ -138,11 +138,16 @@ fi
 # wget -O stats.sh https://raw.githubusercontent.com/ZLHysong/getStats/master/stats.sh
 # wget -O getAverages.py https://raw.githubusercontent.com/ZLHysong/getStats/master/getAverages.py
 
+
+# This currently assumes no other cronjobs are runnin on the current system
+# TODO - Add a proper check here to verify if the specific cronjobs we want to run are added or not
 if [ -n "$(cron_exist)" ]
 then
-    echo "Cronjob already added"
+    echo "Cronjobs already added"
 else
-    echo "Cronjob not running. Adding now..."
-    cronjob="*/15 * * * * /home/user/getStats/stats.sh"
+    echo "Cronjobs not running. Adding now..."
+    cronjob="*/15 * * * * ~/getStats/stats.sh"
     (crontab -u $USER -l; echo "$cronjob" ) | crontab -u $USER -
+    cronjob2="00 11 * * 5  python3 ~/getStats/getAverages.sh log.txt"
+    (crontab -u $USER -l; echo "$cronjob2" ) | crontab -u $USER -
 fi
