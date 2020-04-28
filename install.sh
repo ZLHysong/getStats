@@ -3,7 +3,7 @@
 VNSTAT_CONF="/etc/vnstat.conf"
 USER="zhysong"
 NEW_INTERFACE="eth0"
-INSTALL_LOCATION="/user/share/bin"
+INSTALL_LOCATION="/usr/share/bin/"
 
 timestamp() {
 	date +"%Y-%m-%d %T"
