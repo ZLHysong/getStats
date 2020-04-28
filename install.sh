@@ -1,7 +1,6 @@
 #!/bin/sh
 
 VNSTAT_CONF="/etc/vnstat.conf"
-USER="root"
 NEW_INTERFACE="eth0"
 INSTALL_LOCATION="/usr/share/bin/"
 
@@ -32,8 +31,10 @@ vnstat_status() {
 }
 
 cron_exist() {
-    crontab -l -u $USER
+    crontab -l -u $CURRENTUSER
 }
+
+sed -i "s/CHANGEUSER/$USER/g" getAverages.py
 
 if [ "$(linux_distro)" = 'debian' ] || [ "$(linux_distro)" = 'ubuntu' ]
 then
@@ -94,13 +95,13 @@ fi
 
 if [ "$(linux_distro)" != '"centos"' ]
 then
-    if [ $(vnstat_owner) != $USER ]
+    if [ $(vnstat_owner) != $CURRENTUSER ]
     then
         echo "Permission changes needed"
-        sudo chown $USER -R /var/lib/vnstat/*
-        sudo chgrp $USER -R /var/lib/vnstat/*
-        sudo chown $USER -R /var/lib/vnstat
-        sudo chgrp $USER -R /var/lib/vnstat
+        sudo chown $CURRENTUSER -R /var/lib/vnstat/*
+        sudo chgrp $CURRENTUSER -R /var/lib/vnstat/*
+        sudo chown $CURRENTUSER -R /var/lib/vnstat
+        sudo chgrp $CURRENTUSER -R /var/lib/vnstat
     else
         echo "No permission changes needed"
     fi
@@ -135,8 +136,8 @@ then
 fi
 
 # 2020-04-28 - ZLH - Decided it would be better to just git clone the repo, so this is unnecessary now
-# wget -O stats.sh https://raw.githubusercontent.com/ZLHysong/getStats/master/stats.sh
-# wget -O getAverages.py https://raw.githubusercontent.com/ZLHysong/getStats/master/getAverages.py
+# wget -O stats.sh https://raw.CURRENTUSERcontent.com/ZLHysong/getStats/master/stats.sh
+# wget -O getAverages.py https://raw.CURRENTUSERcontent.com/ZLHysong/getStats/master/getAverages.py
 
 
 # This currently assumes no other cronjobs are runnin on the current system
@@ -147,7 +148,7 @@ then
 else
     echo "Cronjobs not running. Adding now..."
     cronjob="*/15 * * * * /home/ubuntu/getStats/stats.sh"
-    (crontab -u $USER -l; echo "$cronjob" ) | crontab -u $USER -
+    (crontab -u $CURRENTUSER -l; echo "$cronjob" ) | crontab -u $CURRENTUSER -
     cronjob2="00 11 * * 5 /usr/bin/python3 /home/ubuntu/getStats/getAverages.py /home/ubuntu/getStats/log.txt"
-    (crontab -u $USER -l; echo "$cronjob2" ) | crontab -u $USER -
+    (crontab -u $CURRENTUSER -l; echo "$cronjob2" ) | crontab -u $CURRENTUSER -
 fi

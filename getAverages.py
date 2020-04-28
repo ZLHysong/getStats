@@ -4,6 +4,8 @@ from shutil import copyfile
 from time import gmtime, strftime
 def main():
 
+    currentuser = "CHANGEUSER"
+
     ramTotal = 0.00
     ramAverage = 0.00
     ramValues = 0
@@ -58,7 +60,7 @@ def main():
     print("HDD Average: " + format(hddAverage, '2.0f') + "%") # RAM
     print("CPU Average: " + format(cpuAverage, '.2f') + "") # RAM
 
-    f = open("/home/ubuntu/getStats/avglog.txt", "a")
+    f = open("/home/" + currentuser + "/getStats/avglog.txt", "a")
     f.write(words[0] + " " + words[1] + " ") # RAM
     f.write("RAM Average: " + format(ramAverage, '2.0f') + "% ") # RAM
     f.write("HDD Average: " + format(hddAverage, '2.0f') + "% ") # RAM
@@ -67,14 +69,14 @@ def main():
 
     today = strftime("%Y%m%d", gmtime())
     
-    if os.path.exists("/home/ubuntu/getStats/log" + today + ".txt"):
+    if os.path.exists("/home/" + currentuser + "/getStats/log" + today + ".txt"):
         print("file exists")
     else:
-        copyfile("/home/ubuntu/getStats/log.txt", "/home/ubuntu/getStats/log" + today + ".txt")
-        open("/home/ubuntu/getStats/log.txt", "w").close()
+        copyfile("/home/" + currentuser + "/getStats/log.txt", "/home/" + currentuser + "/getStats/log" + today + ".txt")
+        open("/home/" + currentuser + "/getStats/log.txt", "w").close()
 
 if __name__ == '__main__':
-    if os.stat("/home/ubuntu/getStats/log.txt").st_size > 0:
+    if os.stat("/home/" + currentuser + "/getStats/log.txt").st_size > 0:
         main()
     else:
         print("Log file is empty.")
