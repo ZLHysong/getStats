@@ -91,7 +91,7 @@ fi
 if [ $(current_interface) != $NEW_INTERFACE ]
 then
     echo "Wrong interface selected. Changing it now..."
-    sudo sed -i -e "s+$(current_interface)+$NEW_INTERFACE+g" "$VNSTAT_CONF"
+    sudo sed -i -e "s/$(current_interface)/$NEW_INTERFACE/g" "$VNSTAT_CONF"
 else
     echo "No need to change current vnstat interface"
 fi
@@ -104,7 +104,13 @@ else
     echo "vnstat service already running."
 fi
 
-vnstat -u -i $NEW_INTERFACE
+if [ "$(linux_distro)" = 'debian' ]
+then
+    vnstat -u -i $NEW_INTERFACE
+elif [ "$(linux_distro)" = 'centos' ]
+then
+    vnstat -add -i $NEW_INTERFACE
+fi
 
 # 2020-04-28 - ZLH - Decided it would be better to just git clone the repo, so this is unnecessary now
 # wget -O stats.sh https://raw.githubusercontent.com/ZLHysong/getStats/master/stats.sh
