@@ -62,7 +62,7 @@ then
     if [ "$(centos_version)" = "8" ]
     then
         installed() {
-            yum list installed | grep vnstat
+            yum list installed | grep epel-release
         }
 
         if [ -n "$(installed)" ]
