@@ -45,9 +45,21 @@ then
 elif [ "$(linux_distro)" = 'centos' ]
 then
 	echo "I'm CentOS"
+
+    centos_version() {
+        cat /etc/*-release | grep VERSION_ID | cut -d '"' -f2
+    }
+
+    if [ "$centos_version" = "8" ]
+    then
+        sudo yum install epel-release
+        sudo yum update
+    fi
+
     installed() {
         yum list installed | grep vnstat
     }
+
     if [ -z "$installed" ]
     then
         echo "vnstat not installed. Installing..."
