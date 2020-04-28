@@ -70,7 +70,7 @@ def main():
         print("file exists")
     else:
         copyfile("/home/ubuntu/getStats/log.txt", "log" + today + ".txt")
-        open("l/home/ubuntu/getStats/log.txt", "w").close()
+        open("/home/ubuntu/getStats/log.txt", "w").close()
 
 if __name__ == '__main__':
     if os.stat("/home/ubuntu/getStats/log.txt").st_size > 0:
