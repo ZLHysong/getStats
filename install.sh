@@ -97,7 +97,7 @@ then
     fi
 
     python3_installed() {
-        yum list installed | grep vnstat
+        yum list installed | grep python3
     }
 
     if [ -z "$(python3_installed)" ]
