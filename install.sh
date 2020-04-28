@@ -106,8 +106,9 @@ fi
 
 vnstat -u -i $NEW_INTERFACE
 
-wget -O stats.sh https://raw.githubusercontent.com/ZLHysong/getStats/master/stats.sh
-wget -O getAverages.py https://raw.githubusercontent.com/ZLHysong/getStats/master/getAverages.py
+# 2020-04-28 - ZLH - Decided it would be better to just git clone the repo, so this is unnecessary now
+# wget -O stats.sh https://raw.githubusercontent.com/ZLHysong/getStats/master/stats.sh
+# wget -O getAverages.py https://raw.githubusercontent.com/ZLHysong/getStats/master/getAverages.py
 
 if [ -n "$(cron_exist)" ]
 then
