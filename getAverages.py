@@ -58,7 +58,7 @@ def main():
     print("HDD Average: " + format(hddAverage, '2.0f') + "%") # RAM
     print("CPU Average: " + format(cpuAverage, '.2f') + "") # RAM
 
-    f = open("avglog.txt", "a")
+    f = open("/home/ubuntu/getStats/avglog.txt", "a")
     f.write("RAM Average: " + format(ramAverage, '2.0f') + "% ") # RAM
     f.write("HDD Average: " + format(hddAverage, '2.0f') + "% ") # RAM
     f.write("CPU Average: " + format(cpuAverage, '.2f') + "\n") # RAM
@@ -69,7 +69,7 @@ def main():
     if os.path.exists("/home/ubuntu/getStats/log" + today + ".txt"):
         print("file exists")
     else:
-        copyfile("/home/ubuntu/getStats/log.txt", "log" + today + ".txt")
+        copyfile("/home/ubuntu/getStats/log.txt", "/home/ubuntu/getStats/log" + today + ".txt")
         open("/home/ubuntu/getStats/log.txt", "w").close()
 
 if __name__ == '__main__':
