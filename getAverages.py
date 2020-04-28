@@ -32,11 +32,11 @@ def main():
             # Then use the last 3 values for RAM, HDD, and CPU
             words = line.split()
             
-            print(words[0] + " " + words[1]) # RAM
+            print(words[0] + " " + words[1])
             print("RAM: " + format(float(words[2]), '2.0f') + "%" +
              " (" + format(float(words[3]), '2.0f') + "M" +
              " / " + format(float(words[4]), '2.0f') + "M)" +
-             " | HDD: " + format(float(words[5]) * 100, '2.0f') + "%" +
+             " | HDD: " + format(float(words[5]), '2.0f') + "%" +
              " | CPU: " + words[6] +
              " | Received: " + words[7] +
              " | Transmitted: " + words[8])
