@@ -146,8 +146,8 @@ then
     echo "Cronjobs already added"
 else
     echo "Cronjobs not running. Adding now..."
-    cronjob="*/15 * * * * ~/getStats/stats.sh"
+    cronjob="*/15 * * * * /home/ubuntu/getStats/stats.sh"
     (crontab -u $USER -l; echo "$cronjob" ) | crontab -u $USER -
-    cronjob2="00 11 * * 5  python3 ~/getStats/getAverages.sh log.txt"
+    cronjob2="00 11 * * 5 /usr/bin/python3 /home/ubuntu/getStats/getAverages.py /home/ubuntu/getStats/log.txt"
     (crontab -u $USER -l; echo "$cronjob2" ) | crontab -u $USER -
 fi
