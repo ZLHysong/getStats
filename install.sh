@@ -48,18 +48,9 @@ then
     else
         echo "vnstat already installed."
     fi
+    
+    sudo apt install python3 -y
 
-    python3_installed() {
-        yum list installed | grep python3
-    }
-
-    if [ -z "$(python3_installed)" ]
-    then
-        echo "Python 3 not installed. Installing..."
-	    sudo apt install python3 -y
-    else
-        echo "Python 3 already installed."
-    fi
 elif [ "$(linux_distro)" = '"centos"' ]
 then
 	echo "I'm CentOS"
@@ -96,17 +87,7 @@ then
         echo "vnstat already installed."
     fi
 
-    python3_installed() {
-        yum list installed | grep python3
-    }
-
-    if [ -z "$(python3_installed)" ]
-    then
-        echo "Python 3 not installed. Installing..."
-	    sudo yum install python3 -y
-    else
-        echo "Python 3 already installed."
-    fi
+    sudo yum install python3 -y
 else 
 	echo "I don't know what I am"
 fi
