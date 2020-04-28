@@ -91,6 +91,7 @@ fi
 if [ $(current_interface) != $NEW_INTERFACE ]
 then
     echo "Wrong interface selected. Changing it now..."
+    echo "Using command " + "s/$(current_interface)/$NEW_INTERFACE/g"
     sudo sed -i -e "s/$(current_interface)/$NEW_INTERFACE/g" "$VNSTAT_CONF"
 else
     echo "No need to change current vnstat interface"
