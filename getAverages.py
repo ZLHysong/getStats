@@ -66,14 +66,14 @@ def main():
 
     today = strftime("%Y%m%d", gmtime())
     
-    if os.path.exists("log" + today + ".txt"):
+    if os.path.exists("/home/ubuntu/getStats/log" + today + ".txt"):
         print("file exists")
     else:
-        copyfile("log.txt", "log" + today + ".txt")
-        open("log.txt", "w").close()
+        copyfile("/home/ubuntu/getStats/log.txt", "log" + today + ".txt")
+        open("l/home/ubuntu/getStats/og.txt", "w").close()
 
 if __name__ == '__main__':
-    if os.stat("log.txt").st_size > 0:
+    if os.stat("/home/ubuntu/getStats/log.txt").st_size > 0:
         main()
     else:
         print("Log file is empty.")
