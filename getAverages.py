@@ -60,7 +60,7 @@ def main():
 
     f = open("avglog.txt", "a")
     f.write("RAM Average: " + format(ramAverage, '2.0f') + "% ") # RAM
-    f.write("HDD Average: " + format(hddAverage * 100, '2.0f') + "% ") # RAM
+    f.write("HDD Average: " + format(hddAverage, '2.0f') + "% ") # RAM
     f.write("CPU Average: " + format(cpuAverage, '.2f') + "\n") # RAM
     f.close()
 
