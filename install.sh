@@ -62,11 +62,13 @@ then
             yum list installed | grep vnstat
         }
 
-        if [ -z "$installed" ]
+        if [ -n "$installed" ]
         then
             echo "Adding the RHEL7 Repo..."
             sudo yum install epel-release
             sudo yum update
+        else
+            echo "RHEL7 Repo already active."
         fi
     fi
 
@@ -99,12 +101,16 @@ then
     fi
 fi
 
-if [ $(current_interface) != $NEW_INTERFACE ]
+
+if [ -n $(current_interface) ]
 then
-    echo "Wrong interface selected. Changing it now..."
-    sudo sed -i -e "s/$(current_interface)/$NEW_INTERFACE/g" "$VNSTAT_CONF"
-else
-    echo "No need to change current vnstat interface"
+    if [ $(current_interface) != $NEW_INTERFACE ]
+    then
+        echo "Wrong interface selected. Changing it now..."
+        sudo sed -i -e "s/$(current_interface)/$NEW_INTERFACE/g" "$VNSTAT_CONF"
+    else
+        echo "No need to change current vnstat interface"
+    fi
 fi
 
 if [ -n "$(vnstat_status)" ]
