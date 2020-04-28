@@ -58,8 +58,16 @@ then
 
     if [ "$(centos_version)" = "8" ]
     then
-        sudo yum install epel-release
-        sudo yum update
+        installed() {
+            yum list installed | grep vnstat
+        }
+
+        if [ -z "$installed" ]
+        then
+            echo "Adding the RHEL7 Repo..."
+            sudo yum install epel-release
+            sudo yum update
+        fi
     fi
 
     installed() {
@@ -77,16 +85,19 @@ else
 	echo "I don't know what I am"
 fi
 
-
-if [ $(vnstat_owner) != $USER ]
+if [ "$(linux_distro)" != '"centos"' ]
 then
-    echo "Permission changes needed"
-    sudo chown $USER -R /var/lib/vnstat/*
-    sudo chgrp $USER -R /var/lib/vnstat/*
-else
-    echo "No permission changes needed"
+    if [ $(vnstat_owner) != $USER ]
+    then
+        echo "Permission changes needed"
+        sudo chown $USER -R /var/lib/vnstat/*
+        sudo chgrp $USER -R /var/lib/vnstat/*
+        sudo chown $USER -R /var/lib/vnstat
+        sudo chgrp $USER -R /var/lib/vnstat
+    else
+        echo "No permission changes needed"
+    fi
 fi
-
 
 if [ $(current_interface) != $NEW_INTERFACE ]
 then
