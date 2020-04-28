@@ -31,7 +31,7 @@ vnstat_status() {
 }
 
 cron_exist() {
-    crontab -l -u $CURRENTUSER
+    crontab -l -u $USER
 }
 
 sed -i "s/CHANGEUSER/$USER/g" getAverages.py
@@ -95,13 +95,13 @@ fi
 
 if [ "$(linux_distro)" != '"centos"' ]
 then
-    if [ $(vnstat_owner) != $CURRENTUSER ]
+    if [ $(vnstat_owner) != $USER ]
     then
         echo "Permission changes needed"
-        sudo chown $CURRENTUSER -R /var/lib/vnstat/*
-        sudo chgrp $CURRENTUSER -R /var/lib/vnstat/*
-        sudo chown $CURRENTUSER -R /var/lib/vnstat
-        sudo chgrp $CURRENTUSER -R /var/lib/vnstat
+        sudo chown $USER -R /var/lib/vnstat/*
+        sudo chgrp $USER -R /var/lib/vnstat/*
+        sudo chown $USER -R /var/lib/vnstat
+        sudo chgrp $USER -R /var/lib/vnstat
     else
         echo "No permission changes needed"
     fi
@@ -136,8 +136,8 @@ then
 fi
 
 # 2020-04-28 - ZLH - Decided it would be better to just git clone the repo, so this is unnecessary now
-# wget -O stats.sh https://raw.CURRENTUSERcontent.com/ZLHysong/getStats/master/stats.sh
-# wget -O getAverages.py https://raw.CURRENTUSERcontent.com/ZLHysong/getStats/master/getAverages.py
+# wget -O stats.sh https://raw.USERcontent.com/ZLHysong/getStats/master/stats.sh
+# wget -O getAverages.py https://raw.USERcontent.com/ZLHysong/getStats/master/getAverages.py
 
 
 # This currently assumes no other cronjobs are runnin on the current system
@@ -148,7 +148,7 @@ then
 else
     echo "Cronjobs not running. Adding now..."
     cronjob="*/15 * * * * /home/ubuntu/getStats/stats.sh"
-    (crontab -u $CURRENTUSER -l; echo "$cronjob" ) | crontab -u $CURRENTUSER -
+    (crontab -u $USER -l; echo "$cronjob" ) | crontab -u $USER -
     cronjob2="00 11 * * 5 /usr/bin/python3 /home/ubuntu/getStats/getAverages.py /home/ubuntu/getStats/log.txt"
-    (crontab -u $CURRENTUSER -l; echo "$cronjob2" ) | crontab -u $CURRENTUSER -
+    (crontab -u $USER -l; echo "$cronjob2" ) | crontab -u $USER -
 fi
