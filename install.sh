@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VNSTAT_CONF="/etc/vnstat.conf"
-USER="zhysong"
+USER="root"
 NEW_INTERFACE="eth0"
 INSTALL_LOCATION="/usr/share/bin/"
 
@@ -22,7 +22,13 @@ vnstat_owner() {
 }
 
 vnstat_status() {
-    sudo service vnstat status | grep failed
+    if [ "$(linux_distro)" = 'debian' ]
+    then
+        sudo service vnstat status | grep failed
+    elif [ "$(linux_distro)" = 'centos' ]
+    then
+        sudo service vnstat status | grep dead
+    fi
 }
 
 cron_exist() {
@@ -50,7 +56,7 @@ then
         cat /etc/*-release | grep VERSION_ID | cut -d '"' -f2
     }
 
-    if [ "$centos_version" = "8" ]
+    if [ "$(centos_version)" = "8" ]
     then
         sudo yum install epel-release
         sudo yum update
