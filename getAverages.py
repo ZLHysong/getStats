@@ -55,7 +55,7 @@ def main():
     hddAverage = hddTotal / hddValues
     cpuAverage = cpuTotal / cpuValues
     print("RAM Average: " + format(ramAverage, '2.0f') + "%") # RAM
-    print("HDD Average: " + format(hddAverage * 100, '2.0f') + "%") # RAM
+    print("HDD Average: " + format(hddAverage, '2.0f') + "%") # RAM
     print("CPU Average: " + format(cpuAverage, '.2f') + "") # RAM
 
     f = open("avglog.txt", "a")
