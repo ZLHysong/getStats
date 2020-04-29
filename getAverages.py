@@ -2,9 +2,10 @@ import sys
 import os
 from shutil import copyfile
 from time import gmtime, strftime
-def main():
 
-    currentuser = "CHANGEUSER"
+currentuser = "CHANGEUSER"
+
+def main():
 
     ramTotal = 0.00
     ramAverage = 0.00
