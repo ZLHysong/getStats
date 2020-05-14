@@ -89,6 +89,11 @@ then
     fi
 
     sudo yum install python3 -y
+elif  [ "$(linux_distro)" = '"rhel"' ]
+then
+
+	echo "I am RHEL"	
+
 else 
 	echo "I don't know what I am"
 fi
@@ -108,7 +113,7 @@ then
 fi
 
 # if we are in the Docker CentOS droplets, it seems that the "automatic selection" is fine, so ignore this section
-if [ "$(linux_distro)" != '"centos"' ]
+if [ "$(linux_distro)" != '"centos"' ] && [ "$(linux_distro)" != '"rhel"' ]
 then
     if [ $(current_interface) != $NEW_INTERFACE ]
     then
@@ -127,7 +132,7 @@ else
     echo "vnstat service already running."
 fi
 
-if [ "$(linux_distro)" = 'debian' ] || [ "$(linux_distro)" = 'ubuntu' ]
+if [ "$(linux_distro)" = 'debian' ] || [ "$(linux_distro)" = 'ubuntu' ] || [ "$(linux_distro)" = '"rhel"' ]
 then
     vnstat -u -i $NEW_INTERFACE
 elif [ "$(linux_distro)" = 'centos' ]
@@ -142,13 +147,9 @@ fi
 
 # This currently assumes no other cronjobs are runnin on the current system
 # TODO - Add a proper check here to verify if the specific cronjobs we want to run are added or not
-if [ -n "$(cron_exist)" ]
-then
-    echo "Cronjobs already added"
-else
-    echo "Cronjobs not running. Adding now..."
-    cronjob="*/15 * * * * env USER=$LOGNAME /home/$USER/getStats/stats.sh"
-    (crontab -u $USER -l; echo "$cronjob" ) | crontab -u $USER -
-    cronjob2="00 11 * * 5  env USER=$LOGNAME /usr/bin/python3 /home/$USER/getStats/getAverages.py /home/$USER/getStats/log.txt"
-    (crontab -u $USER -l; echo "$cronjob2" ) | crontab -u $USER -
-fi
+echo "Cronjobs not running. Adding now..."
+echo "Cronjobs added, please confirm they were added properly, using the right user and only exist once."
+cronjob="*/15 * * * * env USER=$LOGNAME /home/$USER/getStats/stats.sh"
+(crontab -u $USER -l; echo "$cronjob" ) | crontab -u $USER -
+cronjob2="00 11 * * 5  env USER=$LOGNAME /usr/bin/python3 /home/$USER/getStats/getAverages.py /home/$USER/getStats/log.txt"
+(crontab -u $USER -l; echo "$cronjob2" ) | crontab -u $USER -
